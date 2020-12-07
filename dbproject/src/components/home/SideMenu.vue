@@ -3,7 +3,7 @@
             class="categories"
             default-active="0"
             @select="handleSelect"
-            active-text-color="red">
+            active-text-color="#1baeae">
         <el-menu-item index="0">
             <i class="el-icon-menu"></i>
             <span slot="title">全部</span>
@@ -51,7 +51,7 @@
     .categories{
         position: fixed;
         margin-left: 50%;
-        left: -664px;
+        left: -670px;
         top: 270px;
         width: 150px;
     }

@@ -12,15 +12,15 @@
                 <p slot="content" style="font-size: 13px;margin-bottom: 6px"><span>{{item.gift}}</span></p>
                 <p slot="content" style="width: 300px" class="abstract">{{item.storename}}</p>
                 <el-card v-if = "index % 5 != 4" class="card" bodyStyle="padding:10px" shadow="hover">
-                    <div class="pic" @click="getDetail(item)">
+                    <div class="pic" v-on:click="getDetail(item)">
                         <img :src="item.piclink" alt="商品图片">
                     </div>
                     <div class="info">
                         <div class="comname">
-                            <a href="">{{item.comname}}</a>
+                            {{item.comname}}
                         </div>
                         <div class="price">
-                            <a href="">{{item.newestprice}}</a>
+                            {{item.newestprice}}
                         </div>
                     </div>
                 </el-card>
@@ -30,10 +30,10 @@
                     </div>
                     <div class="info">
                         <div class="comname">
-                            <a href="">{{item.comname}}</a>
+                            {{item.comname}}
                         </div>
                         <div class="price">
-                            <a href="">{{item.newestprice}}</a>
+                            {{item.newestprice}}
                         </div>
                     </div>
                 </el-card>
@@ -127,15 +127,15 @@
     }
     .comname {
         color: #333333;
-        font-size: 12px;
+        font-size: 16px;
         width: 100%;   /*一定要设置宽度，或者元素内含的百分比*/
         overflow:hidden; /*溢出的部分隐藏*/
         white-space: nowrap; /*文本不换行*/
         text-overflow:ellipsis;/*ellipsis:文本溢出显示省略号（...）；clip：不显示省略标记（...），而是简单的裁切*/
     }
     .price{
-        color: #6c9fff;
-        font-size: 14px;
+        color:  #1baeae;
+        font-size: 16px;
         width: 100%;
         text-align: center;
     }
@@ -145,9 +145,5 @@
     }
     a {
         text-decoration: none;
-    }
-
-    a:link, a:visited, a:focus {
-        color: #3377aa;
     }
 </style>

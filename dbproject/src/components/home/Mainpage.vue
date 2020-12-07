@@ -1,14 +1,14 @@
 <template>
     <div>
-        <div style="width: 70%;margin: auto">
+        <div style="width: 100%;margin: auto">
             <el-container style = "width: 100%;margin: auto">
-                <el-header>
+                <el-header >
                     <Header @onSearch='onSearch' ref='headerArea' style="width: 100%"></Header>
-                    <div style="width: 100%;margin-top: 100px">
+                    <div style="width: 70%;margin-top: 100px;margin: auto">
                         <recommend class = "recommend-area"></recommend>
                     </div>
                 </el-header>
-                <el-main>
+                <el-main style="width: 70%;margin: auto">
                     <side-menu @categorySelect='listByCategory' ref='sideMenuArea' style=""></side-menu>
                     <commodities class="commodities-area" ref="commoditiesArea"></commodities>
                 </el-main>
@@ -31,7 +31,7 @@
         components:{Footer, SideMenu, Recommend, Header,Commodities},
         methods: {
             onSearch() {
-               this.$refs.commoditiesArea.searchCommodities(this.$refs.headerArea.keywords)
+                this.$refs.commoditiesArea.searchCommodities(this.$refs.headerArea.keywords)
             },
             listByCategory() {
                 var cid = this.$refs.sideMenuArea.cid

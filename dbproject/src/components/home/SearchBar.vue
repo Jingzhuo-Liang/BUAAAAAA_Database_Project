@@ -1,14 +1,12 @@
 <template>
-    <div >
-        <el-input
-                @keyup.enter.native="searchClick"
+    <div style="height: 50px">
+        <div style="height: 50px;float: left">
+        <input
                 placeholder="搜索商品..."
-                prefix-icon="el-icon-search"
-                size="small"
-                style="width: 200px"
-                v-model="keywords">
-        </el-input>
-        <el-button size="small" type="primary" icon="el-icon-search" @click="searchClick">搜索</el-button>
+                class="text"
+                v-model="keywords"/>
+        </div>
+        <el-button  class="searchButton" @click="searchClick"></el-button>
     </div>
 </template>
 
@@ -31,5 +29,23 @@
 </script>
 
 <style scoped>
-
+    .text {
+        box-sizing: border-box;
+        width: 250px;
+        height: 50px;
+        border: 1px solid #ccc;
+        padding: 0 10px;
+    }
+    .searchButton{
+        box-sizing: border-box;
+        height: 50px;
+        width: 50px;
+        text-indent: -10000px;;
+        background: url(../../assets/search.png) no-repeat;
+        background-size: 100%;
+        background-position: center;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
 </style>

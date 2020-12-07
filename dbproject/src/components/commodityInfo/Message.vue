@@ -2,26 +2,26 @@
     <div>
         <div style="text-align: left">
             <el-badge :value="leaveMessage.length" class="item">
-                <el-button style = "font-size: 18px;font-weight: bold">留言</el-button>
+                <el-button type = "detail" style = "font-size: 18px;font-weight: bold">留言</el-button>
             </el-badge>
-            <el-button v-on:click="addLeaveMessage" style = "float: right"  type="primary" icon="el-icon-edit" circle>添加留言</el-button>
+            <el-button v-on:click="addLeaveMessage" class="leaveMessageButton"  type = "detail" icon="el-icon-edit" circle>添加留言</el-button>
             <el-divider></el-divider>
         </div>
         <div>
             <el-collapse  v-model="activeNames" >
                 <el-collapse-item class="deploy-setting" v-for="(item,index) in leaveMessage" :key="index" :name="index">
                     <template slot="title" style="height: max-content" >
-                        <span style="font-weight:bold;font-size:22px;color:#2C8DF4;text-align: left">{{item.username}} 留言：</span>
-                        <span style="font-weight:bold;font-size:18px;color:#333333; margin-top: 5px">{{item.message}}  </span>
-                        <span style="font-size:8px;color:#333333;margin-top: 10px">{{item.time}}</span>
-                        <el-button v-on:click="addReplyMessage(item)" style = "float: right;font-size: 1px"  type="primary" icon="el-icon-edit" circle>回复</el-button>
+                        <span class="leaveMessageUsername">{{item.username}} 留言：</span>
+                        <span class="leaveMessage">{{item.message}}  </span>
+                        <span class="messageTime">{{item.time}}</span>
+                        <el-button v-on:click="addReplyMessage(item)" class="replyMessageButton"  type="detail" icon="el-icon-edit" circle>回复</el-button>
                     </template>
                     <div  style="text-align: left"
                           v-for ="item1 in replyMessage[item.id]" :key="item1.id">
                         <div style="text-align: left;margin-left: 20px">
-                            <span style="float:left;font-weight:bold;font-size:18px;color:#2C8DF4;">{{item1.username}} 回复 {{item.username}} : </span>
-                            <span style="float:left;font-weight:bold;font-size:14px;color:#333333;margin-top: 5px">{{item1.message}}</span>
-                            <span style="float:left;font-size:4px;color:#333333;margin-top: 10px">{{  item1.time  }}</span>
+                            <span class="replyMessageUsername">{{item1.username}} 回复 {{item.username}} : </span>
+                            <span class="replyMessage">{{item1.message}}</span>
+                            <span class="replyMessageTime">{{  item1.time  }}</span>
                         </div>
                         <br/><br/>
                     </div>
@@ -106,12 +106,69 @@
 </script>
 
 <style scoped>
-    .el-collapse-item__arrow{
-        float : left;
-        margin-left:5px;
-        margin-right:15px;
+    .replyMessageTime {
+        float:left;
+        font-size:4px;
+        color:darkgray;
+        margin-top: 5px
+    }
+    .replyMessage {
+        float:left;
+        font-size:14px;
+        color:#333333;
+    }
+    .replyMessageUsername {
+        float:left;
+        font-weight:bold;
+        font-size:18px;
+        //color:#2C8DF4;
+    }
+    .messageTime {
+        font-size:8px;
+        color:darkgray;
+        margin-top: 10px;
+    }
+    .leaveMessage {
+        font-size:18px;
+        color:#333333;
+        margin-top: 5px;
+    }
+    .leaveMessageUsername{
+        font-weight:bold;
+        font-size:22px;
+        text-align: left;
     }
 
+    .replyMessageButton {
+        float: right;
+        font-size: 1px;
+        margin-left: auto;
+    }
+    .leaveMessageButton{
+        float: right;
+        background-color: #1baeae;
+        color: white;
+    }
+    .el-button--detail:focus,
+    .el-button--detail:hover {
+        background: #48D1CC;
+        border-color: #48D1CC;
+        color: #fff;
+    }
+
+    .el-button--detail {
+        color: #FFF;
+        background-color: #20B2AA;
+        border-color: #20B2AA;
+    }
+    .deploy-setting  >>> .el-collapse-item__arrow  {
+        margin: 0 0 0 0;
+        transition: transform .3s;
+        font-weight: 300;
+    }
+    .el-icon-arrow-right {
+       margin: 0;
+    }
     .el-collapse {
         border: 0;
     }

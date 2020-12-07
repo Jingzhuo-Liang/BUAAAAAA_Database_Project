@@ -1,10 +1,10 @@
 <template>
     <div>
-    <div style="width: 70%;margin: auto;height: 750px">
+    <div style="width: 100%;margin: auto;height: 750px">
         <div>
             <Header style="width: 100%"></Header>
         </div>
-        <div>
+        <div style="width: 70%;margin: auto">
             <el-menu
                     default-active='1'
                     class="el-menu-vertical-demo"
@@ -12,7 +12,7 @@
                     @close="handleClose"
                     background-color="#ffffff"
                     text-color="#000000"
-                    active-text-color="#ffd04b"
+                    active-text-color="#1baeae"
                     >
                 <h3>个人中心</h3>
                 <el-menu-item index='1' v-on:click="getIndex1">
@@ -33,130 +33,134 @@
                 </el-menu-item>
             </el-menu>
         </div>
-        <div v-show = "this.card1">
-            <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                    <span class="cardTitle">我的资料</span>
-                    <el-button v-on:click="updateUser" style="float: right; padding: 3px 0" type="text">更改个人信息</el-button>
-                </div>
-                <div>
-                    <div class="row">
-                        <span class="column1">用户名:</span>
-                        <span class="column2">{{this.user.username}}</span>
-                    </div>
-                    <div class="row">
-                        <span class="column1">邮箱:</span>
-                        <span class="column2">{{this.user.email}}</span>
-                    </div>
-                    <div class="row">
-                        <span class="column1">是否为学生:</span>
-                        <span class="column2">{{this.user.isStudent  === '1' ? '是' : '否'}}</span>
-                    </div>
-                    <div class="row">
-                        <span class="column1">是否为VIP:</span>
-                        <span class="column2">{{this.user.isVip === '1'? '是':'否'}}</span>
-                    </div>
-                    <div class="row">
-                        <span class="column1">平台会员:</span>
-                        <span class="column2">{{this.memberInfo}}</span>
-                    </div>
-                    <div class="row">
-                        <span class="column1">注册时间:</span>
-                        <span class="column2">{{this.user.date}}</span>
+        <div style="width: 70%;margin: auto">
+            <div v-show = "this.card1">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span class="cardTitle">我的资料</span>
+                        <el-button v-on:click="updateUser" class="cardHeadButton" type="text">更改个人信息</el-button>
                     </div>
                     <div>
-                        <UserInfoForm @myConfirm="loadUserInfo" ref="UserInfoEditArea"></UserInfoForm>
-                    </div>
-                </div>
-            </el-card>
-        </div>
-        <div v-show = "this.card2">
-            <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                    <span class="cardTitle">收藏夹</span>
-                    <el-button v-on:click="delAllCollections" style="float: right; padding: 3px 0" type="text">全部删除</el-button>
-                </div>
-                <div v-for="item in collections.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="item.id" class="collection">
-                    <div style="height: 100px;width: 20%;float: left">
-                        <img style="height: 100px;width: 100px"
-                        :src="item.piclink"
-                        />
-                    </div>
-                    <div style="height: 100px;width: 60%;float: left">
-                        <div style="width: 100%;">
-                            <span>{{item.comname}}</span>
+                        <div class="info_item">
+                            <span class="column1">用户名</span>
+                            <span class="column2">{{this.user.username}}</span>
                         </div>
-                        <div style="width: 100%">
-                            <div style="float: left;width: 40%">
-                                <span style="float: left">最新价格：{{item.newestprice}}</span>
-                            </div>
-                            <div style="float: right;width: 60%">
-                                <span>收藏时间：{{item.time}}</span>
-                            </div>
+                        <div class="info_item">
+                            <span class="column1">邮箱</span>
+                            <span class="column2">{{this.user.email}}</span>
                         </div>
-                    </div>
-                    <div style="height: 100px;width: 20%;float: right">
-                        <div style="height: 50px">
-                            <el-button v-on:click="getDetail(item)" type="primary" icon="el-icon-share" >详情</el-button>
+                        <div class="info_item">
+                            <span class="column1">是否为学生</span>
+                            <span class="column2">{{this.user.isStudent  === '1' ? '是' : '否'}}</span>
+                        </div>
+                        <div class="info_item">
+                            <span class="column1">是否为VIP</span>
+                            <span class="column2">{{this.user.isVip === '1'? '是':'否'}}</span>
+                        </div><div class="info_item">
+                        <span class="column1">平台会员</span>
+                        <span class="column2">{{this.memberInfo}}</span>
+                        </div><div class="info_item">
+                            <span class="column1">注册时间</span>
+                            <span class="column2">{{this.user.date}}</span>
                         </div>
                         <div>
-                            <el-button v-on:click="delCollection(item)" type="primary" icon="el-icon-delete">删除</el-button>
+                            <UserInfoForm @myConfirm="loadUserInfo" ref="UserInfoEditArea"></UserInfoForm>
                         </div>
                     </div>
-                </div>
-                <div style="">
-                    <el-pagination
-                            @current-change="handleCurrentChange"
-                            :current-page="currentPage"
-                            :page-size="pagesize"
-                            :total="collections.length">
-                    </el-pagination>
-                </div>
-            </el-card>
-        </div>
-        <div v-show = "this.card3">
-            <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                    <span class="cardTitle">浏览记录</span>
-                    <el-button v-on:click="delAllHistories" style="float: right; padding: 3px 0" type="text">全部删除</el-button>
-                </div>
-                <div v-for="item in this.histories.slice((currentPageHis-1)*pagesizeHis,currentPageHis*pagesizeHis)" :key="item.id" class="history">
+                </el-card>
+            </div>
+            <div v-show = "this.card2">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span class="cardTitle">收藏夹</span>
+                        <el-button v-on:click="delAllCollections" class="cardHeadButton" type="text">全部删除</el-button>
+                    </div>
+                    <div v-for="item in collections.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="item.id" class="collection">
                         <div style="height: 100px;width: 20%;float: left">
                             <img style="height: 100px;width: 100px"
-                                 :src="item.piclink"
+                            :src="item.piclink"
                             />
                         </div>
-                        <div style="height: 100px;width: 60%;float: left">
-                            <div style="width: 100%;">
+                        <div class="collectionInfo">
+                            <div class="collectionName">
                                 <span>{{item.comname}}</span>
                             </div>
-                            <div style="width: 100%">
+                            <div style="width: 100%;">
                                 <div style="float: left;width: 40%">
-                                    <span style="float: left">最新价格：{{item.newestprice}}</span>
+                                    <span class="collectionPriceLabel">最新价格：</span>
+                                    <span class="collectionPrice">{{item.newestprice}}</span>
                                 </div>
                                 <div style="float: right;width: 60%">
-                                    <span>浏览时间：{{item.time}}</span>
+                                    <span class="collectionPriceLabel">收藏时间：</span>
+                                    <span class="collectionPrice">{{item.time}}</span>
                                 </div>
                             </div>
                         </div>
                         <div style="height: 100px;width: 20%;float: right">
                             <div style="height: 50px">
-                                <el-button v-on:click="getDetail(item)" type="primary" icon="el-icon-share" >详情</el-button>
+                                <el-button v-on:click="getDetail(item)"  class="myButton"  type = "detail" icon="el-icon-share" >详情</el-button>
                             </div>
                             <div>
-                                <el-button v-on:click="delHistory(item)" type="primary" icon="el-icon-delete">删除</el-button>
+                                <el-button v-on:click="delCollection(item)" class="myButton"  type = "detail" icon="el-icon-delete">删除</el-button>
                             </div>
                         </div>
                     </div>
                     <div style="">
                         <el-pagination
-                                @current-change="handleCurrentChangeHis"
-                                :current-page="currentPageHis"
-                                :page-size="pagesizeHis"
-                                :total="histories.length">
+                                @current-change="handleCurrentChange"
+                                :current-page="currentPage"
+                                :page-size="pagesize"
+                                :total="collections.length">
                         </el-pagination>
                     </div>
-            </el-card>
+                </el-card>
+            </div>
+            <div v-show = "this.card3">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span class="cardTitle">浏览记录</span>
+                        <el-button v-on:click="delAllHistories" class="cardHeadButton" type="text">全部删除</el-button>
+                    </div>
+                    <div v-for="item in this.histories.slice((currentPageHis-1)*pagesizeHis,currentPageHis*pagesizeHis)" :key="item.id" class="history">
+                            <div style="height: 100px;width: 20%;float: left">
+                                <img style="height: 100px;width: 100px"
+                                     :src="item.piclink"
+                                />
+                            </div>
+                            <div class="collectionInfo">
+                                <div class="collectionName">
+                                    <span>{{item.comname}}</span>
+                                </div>
+                                <div style="width: 100%">
+                                    <div style="float: left;width: 40%">
+                                        <span class="collectionPriceLabel">最新价格：</span>
+                                        <span class="collectionPrice">{{item.newestprice}}</span>
+                                    </div>
+                                    <div style="float: right;width: 60%">
+                                        <span class="collectionPriceLabel">浏览时间：</span>
+                                        <span class="collectionPrice">{{item.time}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 100px;width: 20%;float: right">
+                                <div style="height: 50px">
+                                    <el-button v-on:click="getDetail(item)" class="myButton"  type = "detail" icon="el-icon-share" >详情</el-button>
+                                </div>
+                                <div>
+                                    <el-button v-on:click="delHistory(item)" class="myButton"  type = "detail" icon="el-icon-delete">删除</el-button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="">
+                            <el-pagination
+                                    @current-change="handleCurrentChangeHis"
+                                    :current-page="currentPageHis"
+                                    :page-size="pagesizeHis"
+                                    :total="histories.length">
+                            </el-pagination>
+                        </div>
+                </el-card>
+            </div>
         </div>
     </div>
     <div>
@@ -171,7 +175,7 @@
     import UserInfoForm from "@/components/usercenter/UserInfoForm";
     export default {
         name: "UserCenter",
-        components: {UserInfoForm, Header,Footer},
+        components: { UserInfoForm, Header,Footer},
         data() {
             return {
                 card1:true,
@@ -348,15 +352,69 @@
 </script>
 
 <style scoped>
+    .collectionPrice {
+        float: left;
+        color: #1baeae;
+    }
+    .collectionPriceLabel {
+        float: left;
+        color: #cac6c6;
+    }
+    .collectionInfo {
+        height: 100px;
+        width: 60%;
+        float: left;
+        font-size: 18px;
+    }
+    .collectionName {
+        width: 100%;
+        font-weight: bold;
+        height: 70%;
+    }
+    .el-button--detail:focus,
+    .el-button--detail:hover {
+        background: #48D1CC;
+        border-color: #48D1CC;
+        color: #fff;
+    }
+
+    .el-button--detail {
+        color: #FFF;
+        background-color: #20B2AA;
+        border-color: #20B2AA;
+    }
+    .myButton {
+        background-color: #1baeae;
+        color: white;
+    }
+    .info_item {
+        height: 45px;
+        line-height: 60px;
+        width: 90%;
+        background: #fdfdfd;
+        border: 1px solid #aaa;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-radius: 3px;
+        font-size: 20px;
+        color: #cac6c6;
+        float: left;
+    }
+    .cardHeadButton{
+        float: right;
+        padding: 3px 0;
+        color: #1baeae;
+        font-size: 20px;
+    }
+    .clearfix{
+        height: 10px;
+    }
     .history {
         height: 120px;
         width: 100%;
     }
     .collection {
         height: 120px;
-        width: 100%;
-    }
-    .row{
         width: 100%;
     }
     .column1{
@@ -368,9 +426,11 @@
         text-align: left
     }
     .cardTitle{
+        font-size: 20px;
         float: left;
     }
     .el-menu-vertical-demo {
+        font-size: 20px;
         width: 20%;
         margin-top: 20px;
         float: left;
@@ -379,7 +439,7 @@
     .box-card {
         width: 78%;
         margin-top: 20px;
-        height: 600px;
+        height: 598px;
         float: right;
     }
     span {
@@ -392,4 +452,5 @@
         overflow: hidden;
         text-align: left;
     }
+
 </style>
