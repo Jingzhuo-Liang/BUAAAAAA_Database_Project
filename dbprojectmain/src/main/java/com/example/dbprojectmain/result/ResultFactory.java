@@ -2,7 +2,7 @@ package com.example.dbprojectmain.result;
 
 public class ResultFactory {
     public static Result buildSuccessFactory(Object data){
-        return buildResult(ResultCode.SUCCESS,"成功",data);
+        return buildResult(ResultCode.SUCCESS,"Success",data);
     }
 
     public static Result buildFailFactory(String  message){
