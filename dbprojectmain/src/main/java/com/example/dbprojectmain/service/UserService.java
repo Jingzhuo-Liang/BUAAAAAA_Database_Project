@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -37,6 +39,11 @@ public class UserService {
         userDao.save(user);
     }
 
+    public void deleteById(int id) {
+        System.out.println(id);
+        System.out.println(userDao.deleteByMyId(id));
+    }
+
     public List<User> findAll() {
         return userDao.findAll();
     }
@@ -44,4 +51,12 @@ public class UserService {
     public List<User> findByNamedParam(String title) {
         return userDao.findByNamedParam(title);
     }
+
+    public List<User> findByVIP(String type) {
+        Map<String, String> vvvip = new HashMap<>();
+        vvvip.put("vip","1");
+        vvvip.put("nvip","0");
+        return userDao.findByVIP(vvvip.get(type));
+    }
+
 }
