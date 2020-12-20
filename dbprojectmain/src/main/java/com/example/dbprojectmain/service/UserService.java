@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+
 @Service
 public class UserService {
     @Autowired
@@ -48,15 +51,27 @@ public class UserService {
         return userDao.findAll();
     }
 
-    public List<User> findByNamedParam(String title) {
-        return userDao.findByNamedParam(title);
-    }
-
-    public List<User> findByVIP(String type) {
+    public List<User> findByTitleAndType(String title, String type) {
+        User example = new User();
         Map<String, String> vvvip = new HashMap<>();
         vvvip.put("vip","1");
         vvvip.put("nvip","0");
-        return userDao.findByVIP(vvvip.get(type));
+        ExampleMatcher matcher = ExampleMatcher
+                                .matchingAll()
+                                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                                .withIgnoreCase()
+                                .withIgnorePaths("id");
+        if (title != null && title.isEmpty())
+            title = null;
+        example.setUsername(title);
+        if (type != null && (type.isEmpty() || type.equals("total")))
+            type = null;
+        example.setIsvip(vvvip.get(type));
+        System.out.println("Users example.getIsvip: ");
+        System.out.println(example.getIsvip());
+        System.out.println("Users example.getUsername: ");
+        System.out.println(example.getUsername());
+        return userDao.findAll(Example.of(example, matcher));
     }
 
 }

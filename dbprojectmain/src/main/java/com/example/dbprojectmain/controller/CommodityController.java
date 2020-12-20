@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 @Controller
 public class CommodityController {
@@ -47,5 +49,24 @@ public class CommodityController {
     public Result getCommoditiesByCategory(@PathVariable("cid") int cid) {
         List<Commodity> commodities = commodityService.getCommoditiesByCategory(cid);
         return ResultFactory.buildSuccessFactory(commodities);
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/commodity/list")
+    @ResponseBody
+    public Result getCommodityList(@RequestParam(defaultValue = "id") 
+                                    String sort, 
+                                    @RequestParam(required = false) 
+                                    String comname,
+                                    @RequestParam(required = false) 
+                                    Integer type) {
+        List<Commodity> ans;
+        ans = commodityService.findByName(comname, type);
+        
+        // Sort by inverse or not
+        if (sort.equals("-id")) {
+            Collections.reverse(ans);
+        }
+        return ResultFactory.buildSuccessFactory(ans);
     }
 }

@@ -38,18 +38,8 @@ public class UserController {
                                 @RequestParam(required = false) 
                                 String type) {
         List<User> ans;
-        // Sort by username
-        if (title != null && !title.isEmpty()) {
-            ans = userService.findByNamedParam(title);
-        } else {
-            ans = userService.findAll();
-        }
-        // Sort by vip or not
-        if (type == null || type.isEmpty() || type.equals("total")) {
-            ans = userService.findAll();
-        } else {
-            ans = userService.findByVIP(type);
-        }
+        // Sort by username and vip
+        ans = userService.findByTitleAndType(title, type);
 
         // Sort by inverse or not
         if (sort.equals("-id")) {

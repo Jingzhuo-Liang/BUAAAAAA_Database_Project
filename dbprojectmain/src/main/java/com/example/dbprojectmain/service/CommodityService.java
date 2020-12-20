@@ -5,6 +5,8 @@ import com.example.dbprojectmain.dao.PopularDAO;
 import com.example.dbprojectmain.entity.Commodity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,5 +58,26 @@ public class CommodityService {
 
     public List<Commodity> getCommoditiesByCategory(int cid) {
         return commodityDAO.findAllByCid(cid);
+    }
+
+    public List<Commodity> findByName(String comname, Integer type) {
+        Commodity example = new Commodity();
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                                .withIgnoreCase()
+                                .withIgnorePaths("id", "favorrate", "sales", "newestprice", "cid");
+        if (comname != null && comname.isEmpty())
+            comname = null;
+        example.setComname(comname);
+        if (type != null && !type.equals(0))
+            example.setPlatform(type);
+        else
+            matcher = ExampleMatcher.matching()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withIgnoreCase()
+                .withIgnorePaths("platform", "id", "favorrate", "sales", "newestprice", "cid");
+        System.out.println("Commodity example: ");
+        System.out.println(example.getPlatform());
+        return commodityDAO.findAll(Example.of(example, matcher));
     }
 }
