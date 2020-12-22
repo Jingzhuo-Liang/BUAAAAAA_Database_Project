@@ -122,7 +122,7 @@
                         <el-button v-on:click="delAllHistories" class="cardHeadButton" type="text">全部删除</el-button>
                     </div>
                     <div v-for="item in this.histories.slice((currentPageHis-1)*pagesizeHis,currentPageHis*pagesizeHis)" :key="item.id" class="history">
-                            <div style="height: 100px;width: 20%;float: left">
+                            <div style="height: 100px;width: 20%;float: left;border:1px solid #000">
                                 <img style="height: 100px;width: 100px"
                                      :src="item.piclink"
                                 />

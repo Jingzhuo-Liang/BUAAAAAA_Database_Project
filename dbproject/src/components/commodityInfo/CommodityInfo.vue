@@ -227,7 +227,7 @@
                 }
                 newPrice -= platformDiscountSum
                 newPrice -= commodityDiscountSum
-                this.finalPrice = newPrice
+                this.finalPrice = (newPrice >= 0)?newPrice:0
                 this.platformDiscountSum = platformDiscountSum
                 this.platformMemberDiscountSum = platformMemberDiscountSum
                 this.commodityDiscountSum = commodityDiscountSum

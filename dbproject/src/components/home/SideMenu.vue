@@ -20,6 +20,10 @@
             <i class="el-icon-menu"></i>
             <span slot="title">耳机</span>
         </el-menu-item>
+        <el-menu-item index="4">
+            <i class="el-icon-menu"></i>
+            <span slot="title">其他</span>
+        </el-menu-item>
     </el-menu>
 </template>
 
@@ -52,7 +56,7 @@
         position: fixed;
         margin-left: 50%;
         left: -670px;
-        top: 270px;
+        top: 250px;
         width: 150px;
     }
 </style>

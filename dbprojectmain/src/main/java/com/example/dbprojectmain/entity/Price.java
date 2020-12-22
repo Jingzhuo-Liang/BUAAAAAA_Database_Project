@@ -17,10 +17,6 @@ public class Price {
     @Column(name = "date")
     private String date;
     private int price;
-    private int comdisc;
-    private int platdisc;
-    private int studisc;
-    private int memdisc;
 
     public int getComid() {
         return comid;
@@ -46,35 +42,4 @@ public class Price {
         this.price = price;
     }
 
-    public int getComdisc() {
-        return comdisc;
-    }
-
-    public void setComdisc(int comdisc) {
-        this.comdisc = comdisc;
-    }
-
-    public int getPlatdisc() {
-        return platdisc;
-    }
-
-    public void setPlatdisc(int platdisc) {
-        this.platdisc = platdisc;
-    }
-
-    public int getStudisc() {
-        return studisc;
-    }
-
-    public void setStudisc(int studisc) {
-        this.studisc = studisc;
-    }
-
-    public int getMemdisc() {
-        return memdisc;
-    }
-
-    public void setMemdisc(int memdisc) {
-        this.memdisc = memdisc;
-    }
 }
