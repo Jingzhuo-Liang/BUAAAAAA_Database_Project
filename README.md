@@ -228,7 +228,7 @@ end
     用户可根据邮箱和密码进行登录。用户名或者密码错误则不会登录成功，同时会有信息提示。
 
     ![登录]( https://i.loli.net/2020/12/29/qJZWFw78V5rxLoD.png)
-    ![登录](https://github.com/Jingzhuo-Liang/BUAAAAAA_Database_Project/tree/master/img/登录.png)
+    ![登录](https://github.com/Jingzhuo-Liang/BUAAAAAA_Database_Project/blob/master/img/%E7%99%BB%E5%BD%95.png)
 
 + 注册功能
 
