@@ -40,6 +40,15 @@ public class CommodityService {
         return populars;
     }
 
+    public void add(Commodity commodity) {
+        commodityDAO.save(commodity);
+    }
+
+    public void deleteById(int id) {
+        System.out.println(id);
+        System.out.println(commodityDAO.deleteByMyId(id));
+    }
+
     public List<Commodity> getSearch(String keywords) {
         int platform = 0;
         if (keywords.contains("京东")) {

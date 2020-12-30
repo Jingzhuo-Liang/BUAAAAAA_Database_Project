@@ -22,6 +22,14 @@ public class MessageService {
         return leaveMessageDAO.findAllByComid(comid);
     }
 
+    public List<LeaveMessage> findAll() {
+        return leaveMessageDAO.findAll();
+    }
+
+    public List<ReplyMessage> replyfindAll() {
+        return replyMessageDAO.findAll();
+    }
+
     public List<ReplyMessage> getAllReplyMessage(int leaveMessageId) {
         return replyMessageDAO.findAllByLeavemessageid(leaveMessageId);
     }
@@ -32,5 +40,15 @@ public class MessageService {
 
     public void AddReplyMessage(ReplyMessage replyMessage) {
         replyMessageDAO.save(replyMessage);
+    }
+
+    public void deleteById(int id) {
+        System.out.println(id);
+        System.out.println(leaveMessageDAO.deleteByMyId(id));
+    }
+
+    public void deleteByReplyId(int id) {
+        System.out.println(id);
+        System.out.println(replyMessageDAO.deleteByMyId(id));
     }
 }

@@ -5,7 +5,7 @@
                 <ul class="f1">
                     <li style="margin-left: 20px"> <a >货币三家网</a></li>
                     <li style="margin-left: 10px"> <a >后台管理系统 </a></li>
-                    <li style="margin-left: 10px"> <a >GitHub地址</a></li>
+                    <li style="margin-left: 10px"> <a href="https://github.com/Jingzhuo-Liang/BUAAAAAA_Database_Project">GitHub地址</a></li>
                     <li style="margin-left: 10px"> <a >设计文档</a></li>
                     <li style="margin-left: 10px"> <a >捐赠</a></li>
                     <li style="margin-left: 10px"> <a >问题反馈</a></li>

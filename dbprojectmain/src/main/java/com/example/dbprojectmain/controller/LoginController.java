@@ -1,9 +1,11 @@
 package com.example.dbprojectmain.controller;
 
 import com.example.dbprojectmain.entity.User;
+import com.example.dbprojectmain.entity.Visit;
 import com.example.dbprojectmain.result.Result;
 import com.example.dbprojectmain.result.ResultFactory;
 import com.example.dbprojectmain.service.UserService;
+import com.example.dbprojectmain.service.VisitService;
 import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,17 +14,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
+import java.time.ZoneId;
+import java.time.Clock;
+import java.time.Instant;
 // import sun.plugin.dom.core.Element;
 
 import javax.security.auth.Subject;
 import javax.servlet.http.HttpSession;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Controller
 public class LoginController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    VisitService visitService;
 
     @CrossOrigin
     @PostMapping("api/updateUser")
@@ -76,6 +86,16 @@ public class LoginController {
         }
         else {
             session.setAttribute("user", user);
+            Visit v = new Visit();
+            ZoneId zoneId = ZoneId.of("Asia/Shanghai");  
+            Clock clock = Clock.system(zoneId);            
+            Instant instant = clock.instant();             
+            // LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zoneId); 
+            v.setTime(LocalDateTime.ofInstant(instant, zoneId));
+            System.out.println(v.getTime());
+            v.setUserid(user.getId());
+            v.setDay(LocalDate.now());
+            visitService.saveVisit(v);
             return ResultFactory.buildSuccessFactory(user);
         }
         /*

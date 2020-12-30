@@ -29,18 +29,18 @@
             </div>
             <div style="height: 50px;float: left;width: 100px;margin-left: 100px">
                 <div style="height: 30px;width: 100%">
-                    <span style="color: #eaeaea;line-height: 50px;float: left;margin-left: 10px">京东商城</span>
+                    <span style="color: #eaeaea;line-height: 50px;float: left;margin-left: 10px"><a href="https://www.jd.com/">京东商城</a></span>
                 </div>
                 <div style="height:50px;width: 100%">
-                    <span style="color: #eaeaea;float: left;margin-left: 10px">淘宝商城</span>
+                    <span style="color: #eaeaea;float: left;margin-left: 10px"><a href="https://www.taobao.com/">淘宝商城</a></span>
                 </div >
                 <div style="height: 50px;width: 100%">
-                    <span style="color: #eaeaea;float: left;margin-left: 10px;margin-top: 5px">苏宁商城</span>
+                    <span style="color: #eaeaea;float: left;margin-left: 10px;margin-top: 5px"><a href="https://www.suning.com/">苏宁商城</a></span>
                 </div>
             </div>
             <div style="height: 50px;float: left;width: 100px;margin-left: 100px">
                 <div style="height: 30px;width: 100%">
-                    <span style="color: #eaeaea;line-height: 50px;float: left;margin-left: 10px">了解我们</span>
+                    <span style="color: #eaeaea;line-height: 50px;float: left;margin-left: 10px"><a href="">了解我们</a></span>
                 </div>
                 <div style="height:50px;width: 100%">
                     <span style="color: #eaeaea;float: left;margin-left: 10px">加入我们</span>
@@ -60,7 +60,7 @@
                 <span style="font-size:10px;color: #eaeaea;float: left;margin-left: 10px;margin-top: 5px">友情链接：</span>
             </div>
             <div>
-                <span style="font-size:10px;color: #eaeaea;float: left;margin-left: 10px;margin-top: 5px">GitHub地址</span>
+                <span style="font-size:10px;color: #eaeaea;float: left;margin-left: 10px;margin-top: 5px"><a href="https://github.com/Jingzhuo-Liang/BUAAAAAA_Database_Project">GitHub地址</a></span>
             </div>
         </div>
         <div class="bottom">
@@ -97,5 +97,9 @@
         height: 200px;
         background: #333333;
         width: 100%;
+    }
+    a{
+        text-decoration:none ;
+        color:white ;
     }
 </style>

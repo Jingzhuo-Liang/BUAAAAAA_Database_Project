@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Collections;
+
 @Controller
 public class MessageController {
 
@@ -66,4 +68,87 @@ public class MessageController {
         messageService.AddReplyMessage(replyMessage);
         return ResultFactory.buildSuccessFactory("回复成功");
     }
+
+    @CrossOrigin
+    @GetMapping("/api/leavemessage/list")
+    @ResponseBody
+    public Result getMessageList(@RequestParam(defaultValue = "id") 
+                                String sort, 
+                                @RequestParam(required = false) 
+                                Integer commidtyid) {
+        List<LeaveMessage> ans;
+        // Sort by username and vip
+        if (commidtyid != null)
+            ans = messageService.getAllLeaveMessage(commidtyid.intValue());
+        else
+            ans = messageService.findAll();
+
+        // Sort by inverse or not
+        if (sort.equals("-id")) {
+            Collections.reverse(ans);
+        }
+        return ResultFactory.buildSuccessFactory(ans);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/leavemessage/update")
+    @ResponseBody
+    public Result addOrUpdate(@RequestBody LeaveMessage updatelist) {
+        String message;
+        messageService.AddLeaveMessage(updatelist);
+        message = "update successful";
+        return ResultFactory.buildSuccessFactory(message);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/leavemessage/delete")
+    @ResponseBody
+    public Result Delete(@RequestBody LeaveMessage deletelist) {
+        String message;
+        messageService.deleteById(deletelist.getId());
+        message = "delete successful";
+        return ResultFactory.buildSuccessFactory(message);
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/replymessage/list")
+    @ResponseBody
+    public Result getReplyMessageList(@RequestParam(defaultValue = "id") 
+                                String sort, 
+                                @RequestParam(required = false) 
+                                Integer leavemsgid) {
+        List<ReplyMessage> ans;
+        // Sort by username and vip
+        if (leavemsgid != null)
+            ans = messageService.getAllReplyMessage(leavemsgid.intValue());
+        else
+            ans = messageService.replyfindAll();
+
+        // Sort by inverse or not
+        if (sort.equals("-id")) {
+            Collections.reverse(ans);
+        }
+        return ResultFactory.buildSuccessFactory(ans);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/replymessage/update")
+    @ResponseBody
+    public Result addOrUpdateReply(@RequestBody ReplyMessage updatelist) {
+        String message;
+        messageService.AddReplyMessage(updatelist);
+        message = "update successful";
+        return ResultFactory.buildSuccessFactory(message);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/replymessage/delete")
+    @ResponseBody
+    public Result DeleteReply(@RequestBody LeaveMessage deletelist) {
+        String message;
+        messageService.deleteByReplyId(deletelist.getId());
+        message = "delete successful";
+        return ResultFactory.buildSuccessFactory(message);
+    }
+
 }

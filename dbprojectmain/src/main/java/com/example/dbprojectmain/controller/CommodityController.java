@@ -69,4 +69,24 @@ public class CommodityController {
         }
         return ResultFactory.buildSuccessFactory(ans);
     }
+
+    @CrossOrigin
+    @PostMapping("/api/commodity/update")
+    @ResponseBody
+    public Result addOrUpdate(@RequestBody Commodity updatelist) {
+        String message;
+        commodityService.add(updatelist);
+        message = "update successful";
+        return ResultFactory.buildSuccessFactory(message);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/commodity/delete")
+    @ResponseBody
+    public Result Delete(@RequestBody Commodity deletelist) {
+        String message;
+        commodityService.deleteById(deletelist.getId());
+        message = "delete successful";
+        return ResultFactory.buildSuccessFactory(message);
+    }
 }
